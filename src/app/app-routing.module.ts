@@ -4,12 +4,12 @@ import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent},
-  { path: '', redirectTo: 'home', pathMatch: 'full'},
-  { path: '**', redirectTo: 'home', pathMatch: 'full'},
   {
     path: 'coffee-list',
-    loadChildren: () => import('./coffee-list/coffee-list.module').then(m => m.CoffeeListModule),
-  }
+    loadChildren: () => import('./coffee-list/coffee-list.module').then(m => m.CoffeeListModule)
+  },
+  { path: '', redirectTo: 'home', pathMatch: 'full'},
+  { path: '**', redirectTo: 'home', pathMatch: 'full'},
 ];
 
 @NgModule({
