@@ -3,14 +3,15 @@
         <div class="col-2 mt-3" *ngFor="let coffee of coffees">
             <div class="card">
                 <img src="" class="card-img-top" alt="">
-                <div class="card-body">
+                <div class="card-body text-center">
                     <h5 class="card-title">{{ coffee.name }}</h5>
+                    <hr>
                     <p class="card-text">Roast: {{ coffee.roast }}</p>
                     <p class="card-text">Water Mass: {{ coffee.water }}</p>
                     <p class="card-text">Grounds Mass: {{ coffee.grounds }}</p>
                     <p class="card-text">Grind Setting: {{ coffee.grind }}</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                    <button class="btn btn-danger" (click)="delete(coffee.id)">Delete</button>
+                    <a href="#" class="btn btn-primary">Details</a>
+                    <button class="btn btn-danger ml-1" (click)="delete(coffee.id)">Delete</button>
                 </div>
             </div>
         </div>

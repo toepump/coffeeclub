@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { Coffee } from 'src/app/models/coffee.model';
+import { Coffee } from 'src/app/coffee-list/coffee.model';
 
 @Injectable({
   providedIn: 'root'
@@ -24,5 +24,5 @@ export class CoffeeService {
 
   deleteCoffee(coffeeId: string){
     this.firestore.doc('coffees/' + coffeeId).delete();
-}
+  }
 }
