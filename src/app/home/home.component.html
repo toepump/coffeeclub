@@ -5,10 +5,29 @@
         </div>
         <div class="card-body">
             <div class="container-fluid">
-            <div>
-                <h3>Chris Muzzin and Michael Cho!!!</h3>
-            </div>
+                <div>
+                    <h3>Chris Muzzin and Michael Cho!!!</h3>
+                </div>
+                <h1 *ngIf="authService.user | async">
+                    Welcome {{ (authService.user | async)?.email }}!
+                </h1>
+                <div *ngIf="!(authService.user | async)">
+                    <input type="text" [(ngModel)]="email" placeholder="Enter email" />
+                    <input type="password" [(ngModel)]="password" placeholder="Enter password"/>
+              
+                    <button (click)="signup()" [disabled]="!email || !password">
+                      Signup
+                    </button>
+              
+                    <button (click)="login()" [disabled]="!email || !password">
+                      Login
+                    </button>
+                  </div>
+              
+                  <button (click)="logout()" *ngIf="authService.user | async">
+                    Logout
+                  </button>
             </div>
         </div>
-        </div>
+    </div>
 </div>
