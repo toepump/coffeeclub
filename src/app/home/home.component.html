@@ -1,14 +1,28 @@
-<div class="mt-3">
-    <div class="card">
+<div class="mt-5">
+    <div class="card login" style="width: 18rem;">
         <div class="card-header">
             {{title}}
         </div>
         <div class="card-body">
-            <div class="container-fluid">
-            <div>
-                <h3>Chris Muzzin and Michael Cho!!!</h3>
+          <p *ngIf="authService.user | async">
+              Welcome {{ (authService.user | async)?.email }}!
+          </p>
+          <div *ngIf="!(authService.user | async)">
+              <input class="form-control" type="text" [(ngModel)]="email" placeholder="Enter email" />
+              <input class="form-control mt-2" type="password" [(ngModel)]="password" placeholder="Enter password"/>
+        
+              <button class="btn btn-primary mt-3" (click)="signup()" [disabled]="!email || !password">
+                Signup
+              </button>
+        
+              <button class="btn btn-success mt-3 ml-2" (click)="login()" [disabled]="!email || !password">
+                Login
+              </button>
             </div>
-            </div>
+        
+            <button class="btn btn-danger" (click)="logout()" *ngIf="authService.user | async">
+              Logout
+            </button>
         </div>
-        </div>
+    </div>
 </div>

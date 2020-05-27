@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./nav.component.scss']
 })
 export class NavComponent implements OnInit {
-   title = 'Coffee Club';
+  title = 'Coffee Club';
   constructor() { }
 
   ngOnInit(): void {
