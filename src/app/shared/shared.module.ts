@@ -7,8 +7,10 @@ import { RouterModule } from '@angular/router';
   declarations: [NavComponent],
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
   ],
-  exports: [NavComponent],
+  exports: [
+    NavComponent,
+  ],
 })
 export class SharedModule { }

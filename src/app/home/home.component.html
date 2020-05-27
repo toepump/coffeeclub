@@ -7,22 +7,27 @@
           <p *ngIf="authService.user | async">
               Welcome {{ (authService.user | async)?.email }}!
           </p>
-          <div *ngIf="!(authService.user | async)">
-              <input class="form-control" type="text" [(ngModel)]="email" placeholder="Enter email" />
-              <input class="form-control mt-2" type="password" [(ngModel)]="password" placeholder="Enter password"/>
-        
-              <button class="btn btn-primary mt-3" (click)="signup()" [disabled]="!email || !password">
+            <form *ngIf="!(authService.user | async)" [formGroup]="form">
+              <input id="email" class="form-control" [ngClass]="{'is-invalid': form.controls.email.status === 'INVALID' && !form.controls.email.pristine}" type="text" placeholder="Enter email" formControlName="email" />
+              <div *ngIf="form.controls.email.status === 'INVALID' && !form.controls.email.pristine" [ngClass]="{'text-danger': form.controls.email.status === 'INVALID' && !form.controls.email.pristine}" type="text" placeholder="Enter email" formControlName="email">
+                Enter a valid email.
+              </div>
+              <input class="form-control mt-2" [ngClass]="{'is-invalid': form.controls.password.status === 'INVALID' && !form.controls.password.pristine}" type="password" placeholder="Enter password" formControlName="password"/>
+              <div *ngIf="form.controls.password.status === 'INVALID' && !form.controls.password.pristine" [ngClass]="{'text-danger': form.controls.password.status === 'INVALID' && !form.controls.password.pristine}">
+                Enter a valid password.
+              </div>
+              <button class="btn btn-primary mt-3" (click)="signup()" [disabled]="form.status === 'INVALID'">
                 Signup
               </button>
         
-              <button class="btn btn-success mt-3 ml-2" (click)="login()" [disabled]="!email || !password">
+              <button class="btn btn-success mt-3 ml-2" (click)="login()" [disabled]="form.status === 'INVALID'">
                 Login
               </button>
-            </div>
+            </form>
         
             <button class="btn btn-danger" (click)="logout()" *ngIf="authService.user | async">
               Logout
             </button>
-        </div>
+          </div>
     </div>
 </div>
