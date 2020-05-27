@@ -8,15 +8,20 @@ import { Observable, ObjectUnsubscribedError } from 'rxjs';
 export class AuthService {
   user: Observable<firebase.User>;
 
-  constructor(private firebaseAuth: AngularFireAuth) {
+  constructor(public firebaseAuth: AngularFireAuth) {
     this.user = firebaseAuth.authState;
   }
 
-  signup(email: string, password: string) {
-    this.firebaseAuth
+  async sendEmailVerification() {
+    await this.firebaseAuth.currentUser.then(u => {u.sendEmailVerification(); });
+  }
+
+  async signup(email: string, password: string) {
+    await this.firebaseAuth
       .createUserWithEmailAndPassword(email, password)
       .then(value => {
         console.log('Success!', value);
+        this.sendEmailVerification();
       })
       .catch(err => {
         console.log('Something went wrong:', err.message);
