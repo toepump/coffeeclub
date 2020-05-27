@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../authentication/auth.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -11,13 +12,13 @@ export class HomeComponent implements OnInit {
   password: string;
   message: string;
   title = 'Login';
+
   constructor(
     public authService: AuthService
   ) { }
 
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   signup() {
     this.authService.signup(this.email, this.password);

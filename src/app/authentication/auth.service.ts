@@ -1,14 +1,16 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { Observable, ObjectUnsubscribedError } from 'rxjs';
+import { Observable, ObjectUnsubscribedError, BehaviorSubject } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   user: Observable<firebase.User>;
+  isUserLoggedIn: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
-  constructor(public firebaseAuth: AngularFireAuth) {
+  constructor(private router: Router ,public firebaseAuth: AngularFireAuth) {
     this.user = firebaseAuth.authState;
   }
 
@@ -32,7 +34,9 @@ export class AuthService {
     this.firebaseAuth
       .signInWithEmailAndPassword(email, password)
       .then(value => {
-        console.log('Nice, it worked!');
+        console.log('Nice, it worked!', value);
+        this.isUserLoggedIn.next(true);
+        this.router.navigate(['/coffee-list', {}]);
       })
       .catch(err => {
         console.log('Something went wrong:', err.message);
@@ -40,7 +44,8 @@ export class AuthService {
   }
 
   logout() {
-    this.firebaseAuth
-      .signOut();
+    this.firebaseAuth.signOut();
+    this.isUserLoggedIn.next(false);
+    this.router.navigate(['/home', {}]);
   }
 }
