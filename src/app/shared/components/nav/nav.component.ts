@@ -8,7 +8,6 @@ import { AuthService } from 'src/app/authentication/auth.service';
 })
 export class NavComponent implements OnInit {
   title = 'Coffee Club';
-  isloggedIn: boolean = false;
   constructor(private authService: AuthService) { }
 
   ngOnInit(): void {}
