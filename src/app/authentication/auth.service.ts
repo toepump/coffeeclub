@@ -10,7 +10,7 @@ export class AuthService {
   user: Observable<firebase.User>;
   isUserLoggedIn: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
-  constructor(private router: Router ,public firebaseAuth: AngularFireAuth) {
+  constructor(private router: Router , public firebaseAuth: AngularFireAuth) {
     this.user = firebaseAuth.authState;
   }
 
@@ -30,7 +30,7 @@ export class AuthService {
       });
   }
 
-  login(email: string, password: string) : Promise<any> {
+  login(email: string, password: string): Promise<any> {
     return this.firebaseAuth
       .signInWithEmailAndPassword(email, password)
       .then(value => {
